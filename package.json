@@ -7,13 +7,28 @@
 		"vscode": "^1.46.0"
 	},
 	"categories": [
-		"Other"
+		"Programming Languages", "Snippets"
 	],
 	"activationEvents": [
 		"onCommand:context-lmtx.helloWorld"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"languages": [
+			{
+				"id": "lmtx",
+				"aliases": ["LMTX", "ConTeXt"],
+				"extensions": [
+					".lmtx"
+				]
+			}
+		],
+		"snippets": [
+			{
+				"language": "lmtx",
+				"path": "./snippets.json"
+			}
+		],
 		"commands": [
 			{
 				"command": "context-lmtx.helloWorld",

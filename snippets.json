@@ -1,0 +1,19 @@
+{
+	"Print to console": {
+		"prefix": "log",
+		"body": [
+			"console.log('$1');",
+			"$2"
+		],
+		"description": "Log output to console"
+	},
+
+	"LMTX Sample Document": {
+		"prefix": "\\lmtx-sample-document",
+		"body": [
+			"\\starttext",
+			"$1",
+			"\\stoptext"
+		]
+	}
+}
