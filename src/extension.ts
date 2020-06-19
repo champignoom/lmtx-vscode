@@ -73,7 +73,66 @@ function get_font_fields(row: String, indices: Array<number>): Record<string,str
 	return result;
 }
 
-let outputChannel: vscode.OutputChannel | undefined = undefined;
+let myOutputChannel: vscode.OutputChannel | undefined = undefined;
+
+function getFreshOutputChannel(): vscode.OutputChannel {
+	if (myOutputChannel === undefined) {
+		myOutputChannel = vscode.window.createOutputChannel("lmtx");
+	} else {
+		myOutputChannel.clear();
+	}
+
+	myOutputChannel.show(true);
+	return myOutputChannel;
+}
+
+function cmdPickFont() {
+	// mtxrun --script fonts --list --all
+	// traverse ${ConTeXT_Path}/tex/texmf/fonts, create map
+
+	const outputChannel = getFreshOutputChannel();
+	const result_buffer = child_process.execFileSync('mtxrun', ['--script', 'fonts', '--list', '--all']);
+	// outputChannel.appendLine('<<<');
+	// outputChannel.appendLine(result_buffer);
+	// outputChannel.appendLine('>>>');
+	const result_lines = result_buffer.toString().split('\n');
+
+	// The result should be of the form:
+	//   identifier   familyname  fontname  filename subfont   instances
+	//   (empty line)
+	//   dejavumathnormal   dejavumath dejavumathregular  dejavu-math.otf
+	//   ....
+
+	if (result_lines.length === 0) {
+		outputChannel.appendLine('result is empty')
+		return;
+	}
+
+	const thead_indices = get_field_indices(result_lines[0]);
+	if (thead_indices === undefined) {
+		outputChannel.appendLine('unexpected header:');
+		outputChannel.appendLine(result_lines[0]);
+		outputChannel.appendLine('expected:');
+		outputChannel.appendLine(mtxrun_font_fields.join(" "));
+		return;
+	}
+
+	for (let i=2; i<result_lines.length; ++i) {
+		if (result_lines[i].length === 0) {
+			continue;
+		}
+
+		const field_values = get_font_fields(result_lines[i], thead_indices);
+		if (field_values === undefined) {
+			outputChannel.appendLine(`line ${i} in bad form:`);
+			outputChannel.appendLine(result_lines[i]);
+			outputChannel.appendLine('header:');
+			outputChannel.appendLine(result_lines[0]);
+			return;
+		}
+		outputChannel.appendLine(`${field_values.identifier}, ${field_values.familyname}, ${field_values.fontname}, ${field_values.filename}`);
+	}
+}
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -93,65 +152,12 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Hello World from ConTeXt LMTX!');
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('context-lmtx.pickfonts', () => {
-		// mtxrun --script fonts --list --all
-		// traverse ${ConTeXT_Path}/tex/texmf/fonts, create map
-
-		if (outputChannel === undefined) {
-			outputChannel = vscode.window.createOutputChannel("lmtx");
-		} else {
-			outputChannel.clear();
-		}
-
-		outputChannel.show(true);
-
-		const result_buffer = child_process.execFileSync('mtxrun', ['--script', 'fonts', '--list', '--all']);
-		// outputChannel.appendLine('<<<');
-		// outputChannel.appendLine(result_buffer);
-		// outputChannel.appendLine('>>>');
-		const result_lines = result_buffer.toString().split('\n');
-
-		// The result should be of the form:
-		//   identifier   familyname  fontname  filename subfont   instances
-		//   (empty line)
-		//   dejavumathnormal   dejavumath dejavumathregular  dejavu-math.otf
-		//   ....
-
-		if (result_lines.length === 0) {
-			outputChannel.appendLine('result is empty')
-			return;
-		}
-
-		const thead_indices = get_field_indices(result_lines[0]);
-		if (thead_indices === undefined) {
-			outputChannel.appendLine('unexpected header:');
-			outputChannel.appendLine(result_lines[0]);
-			outputChannel.appendLine('expected:');
-			outputChannel.appendLine(mtxrun_font_fields.join(" "));
-			return;
-		}
-
-		for (let i=2; i<result_lines.length; ++i) {
-			if (result_lines[i].length === 0) {
-				continue;
-			}
-
-			const field_values = get_font_fields(result_lines[i], thead_indices);
-			if (field_values === undefined) {
-				outputChannel.appendLine(`line ${i} in bad form:`);
-				outputChannel.appendLine(result_lines[i]);
-				outputChannel.appendLine('header:');
-				outputChannel.appendLine(result_lines[0]);
-				return;
-			}
-			outputChannel.appendLine(`${field_values.identifier}, ${field_values.familyname}, ${field_values.fontname}, ${field_values.filename}`);
-		}
-	}));
+	context.subscriptions.push(vscode.commands.registerCommand('context-lmtx.pickfonts', cmdPickFont));
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {
-	if (outputChannel !== undefined) {
-		outputChannel.dispose();
+	if (myOutputChannel !== undefined) {
+		myOutputChannel.dispose();
 	}
 }
