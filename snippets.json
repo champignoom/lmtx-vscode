@@ -159,5 +159,265 @@
 			"]",
 			"$1"
 		]
+	},
+
+	"Serif/Roman": {
+		"prefix": "\\lmtx-font-switch-roman-serif",
+		"body": "\\rm"
+	},
+
+	"Sans Serif": {
+		"prefix": "\\lmtx-font-switch-sans-serif",
+		"body": "\\ss"
+	},
+
+	"Teletype/Monospace": {
+		"prefix": "\\lmtx-font-switch-teletype-monospace",
+		"body": "\\tt"
+	},
+
+	"Normal": {
+		"prefix": "\\lmtx-font-switch-normal-size-0",
+		"body": "\\tf"
+	},
+
+	"Normal x0.6": {
+		"prefix": "\\lmtx-font-switch-normal-size-minus-2",
+		"body": "\\tfxx"
+	},
+
+	"Normal x0.8": {
+		"prefix": "\\lmtx-font-switch-normal-size-minus-1",
+		"body": "\\tfxx"
+	},
+
+	"Normal x1.2": {
+		"prefix": "\\lmtx-font-switch-normal-size-plus-1",
+		"body": "\\tfa"
+	},
+
+	"Normal x1.44": {
+		"prefix": "\\lmtx-font-switch-normal-size-plus-2",
+		"body": "\\tfb"
+	},
+
+	"Normal x1.728": {
+		"prefix": "\\lmtx-font-switch-normal-size-plus-3",
+		"body": "\\tfc"
+	},
+
+	"Normal x2.074": {
+		"prefix": "\\lmtx-font-switch-normal-size-plus-4",
+		"body": "\\tfd"
+	},
+
+	"Bold": {
+		"prefix": "\\lmtx-font-switch-bold-size-0",
+		"body": "\\bf"
+	},
+
+	"Bold x0.6": {
+		"prefix": "\\lmtx-font-switch-bold-size-minus-2",
+		"body": "\\bfxx"
+	},
+
+	"Bold x0.8": {
+		"prefix": "\\lmtx-font-switch-bold-size-minus-1",
+		"body": "\\bfxx"
+	},
+
+	"Bold x1.2": {
+		"prefix": "\\lmtx-font-switch-bold-size-plus-1",
+		"body": "\\bfa"
+	},
+
+	"Bold x1.44": {
+		"prefix": "\\lmtx-font-switch-bold-size-plus-2",
+		"body": "\\bfb"
+	},
+
+	"Bold x1.728": {
+		"prefix": "\\lmtx-font-switch-bold-size-plus-3",
+		"body": "\\bfc"
+	},
+
+	"Bold x2.074": {
+		"prefix": "\\lmtx-font-switch-bold-size-plus-4",
+		"body": "\\bfd"
+	},
+
+	"Italic": {
+		"prefix": "\\lmtx-font-switch-italic-size-0",
+		"body": "\\it"
+	},
+
+	"Italic x0.6": {
+		"prefix": "\\lmtx-font-switch-italic-size-minus-2",
+		"body": "\\itxx"
+	},
+
+	"Italic x0.8": {
+		"prefix": "\\lmtx-font-switch-italic-size-minus-1",
+		"body": "\\itxx"
+	},
+
+	"Italic x1.2": {
+		"prefix": "\\lmtx-font-switch-italic-size-plus-1",
+		"body": "\\ita"
+	},
+
+	"Italic x1.44": {
+		"prefix": "\\lmtx-font-switch-italic-size-plus-2",
+		"body": "\\itb"
+	},
+
+	"Italic x1.728": {
+		"prefix": "\\lmtx-font-switch-italic-size-plus-3",
+		"body": "\\itc"
+	},
+
+	"Italic x2.074": {
+		"prefix": "\\lmtx-font-switch-italic-size-plus-4",
+		"body": "\\itd"
+	},
+
+	"Slanted": {
+		"prefix": "\\lmtx-font-switch-slanted-size-0",
+		"body": "\\sl"
+	},
+
+	"Slanted x0.6": {
+		"prefix": "\\lmtx-font-switch-slanted-size-minus-2",
+		"body": "\\slxx"
+	},
+
+	"Slanted x0.8": {
+		"prefix": "\\lmtx-font-switch-slanted-size-minus-1",
+		"body": "\\slxx"
+	},
+
+	"Slanted x1.2": {
+		"prefix": "\\lmtx-font-switch-slanted-size-plus-1",
+		"body": "\\sla"
+	},
+
+	"Slanted x1.44": {
+		"prefix": "\\lmtx-font-switch-slanted-size-plus-2",
+		"body": "\\slb"
+	},
+
+	"Slanted x1.728": {
+		"prefix": "\\lmtx-font-switch-slanted-size-plus-3",
+		"body": "\\slc"
+	},
+
+	"Slanted x2.074": {
+		"prefix": "\\lmtx-font-switch-slanted-size-plus-4",
+		"body": "\\sld"
+	},
+
+	"Bold Italic": {
+		"prefix": "\\lmtx-font-switch-bold-italic-size-0",
+		"body": "\\bi"
+	},
+
+	"Bold Italic x0.6": {
+		"prefix": "\\lmtx-font-switch-bold-italic-size-minus-2",
+		"body": "\\bixx"
+	},
+
+	"Bold Italic x0.8": {
+		"prefix": "\\lmtx-font-switch-bold-italic-size-minus-1",
+		"body": "\\bixx"
+	},
+
+	"Bold Italic x1.2": {
+		"prefix": "\\lmtx-font-switch-bold-italic-size-plus-1",
+		"body": "\\bia"
+	},
+
+	"Bold Italic x1.44": {
+		"prefix": "\\lmtx-font-switch-bold-italic-size-plus-2",
+		"body": "\\bib"
+	},
+
+	"Bold Italic x1.728": {
+		"prefix": "\\lmtx-font-switch-bold-italic-size-plus-3",
+		"body": "\\bic"
+	},
+
+	"Bold Italic x2.074": {
+		"prefix": "\\lmtx-font-switch-bold-italic-size-plus-4",
+		"body": "\\bid"
+	},
+
+	"Bold Slanted": {
+		"prefix": "\\lmtx-font-switch-bold-slanted-size-0",
+		"body": "\\bs"
+	},
+
+	"Bold Slanted x0.6": {
+		"prefix": "\\lmtx-font-switch-bold-slanted-size-minus-2",
+		"body": "\\bsxx"
+	},
+
+	"Bold Slanted x0.8": {
+		"prefix": "\\lmtx-font-switch-bold-slanted-size-minus-1",
+		"body": "\\bsxx"
+	},
+
+	"Bold Slanted x1.2": {
+		"prefix": "\\lmtx-font-switch-bold-slanted-size-plus-1",
+		"body": "\\bsa"
+	},
+
+	"Bold Slanted x1.44": {
+		"prefix": "\\lmtx-font-switch-bold-slanted-size-plus-2",
+		"body": "\\bsb"
+	},
+
+	"Bold Slanted x1.728": {
+		"prefix": "\\lmtx-font-switch-bold-slanted-size-plus-3",
+		"body": "\\bsc"
+	},
+
+	"Bold Slanted x2.074": {
+		"prefix": "\\lmtx-font-switch-bold-slanted-size-plus-4",
+		"body": "\\bsd"
+	},
+
+	"SmallCap": {
+		"prefix": "\\lmtx-font-switch-smallcap-size-0",
+		"body": "\\sc"
+	},
+
+	"SmallCap x0.6": {
+		"prefix": "\\lmtx-font-switch-smallcap-size-minus-2",
+		"body": "\\scxx"
+	},
+
+	"SmallCap x0.8": {
+		"prefix": "\\lmtx-font-switch-smallcap-size-minus-1",
+		"body": "\\scxx"
+	},
+
+	"SmallCap x1.2": {
+		"prefix": "\\lmtx-font-switch-smallcap-size-plus-1",
+		"body": "\\sca"
+	},
+
+	"SmallCap x1.44": {
+		"prefix": "\\lmtx-font-switch-smallcap-size-plus-2",
+		"body": "\\scb"
+	},
+
+	"SmallCap x1.728": {
+		"prefix": "\\lmtx-font-switch-smallcap-size-plus-3",
+		"body": "\\scc"
+	},
+
+	"SmallCap x2.074": {
+		"prefix": "\\lmtx-font-switch-smallcap-size-plus-4",
+		"body": "\\scd"
 	}
 }

@@ -2,6 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as child_process from 'child_process';
+import * as fs from 'fs'
+import * as path from 'path'
 import { assert } from 'console';
 import { findSourceMap } from 'module';
 import { resolveCliPathFromVSCodeExecutablePath } from 'vscode-test';
@@ -12,6 +14,8 @@ const FIELD_FONTNAME   = "fontname";
 const FIELD_FILENAME   = "filename";
 const FIELD_SUBFONT    = "subfont";
 const FIELD_INSTANCES  = "instances";
+
+const FONT_PICKER_HTML = 'font_picker.html';
 
 const mtxrun_font_fields = [
 	FIELD_IDENTIFIER,
@@ -86,7 +90,7 @@ function getFreshOutputChannel(): vscode.OutputChannel {
 	return myOutputChannel;
 }
 
-function cmdPickFont() {
+function _cmdPickFont() {
 	// mtxrun --script fonts --list --all
 	// traverse ${ConTeXT_Path}/tex/texmf/fonts, create map
 
@@ -134,6 +138,53 @@ function cmdPickFont() {
 	}
 }
 
+function cmdPickFont(context: vscode.ExtensionContext) {
+	// FIXME: handle ownership
+	let panel = vscode.window.createWebviewPanel(
+		'lmtxFontPicker',
+		'LMTX Font Picker',
+		vscode.ViewColumn.Beside,
+	);
+
+	const fontPickerHtmlPath = path.join(context.extensionPath, 'src', FONT_PICKER_HTML);
+	const outputChannel = getFreshOutputChannel();
+	outputChannel.appendLine(fontPickerHtmlPath);
+	panel.webview.html = fs.readFileSync(fontPickerHtmlPath).toString();
+}
+
+function cmdCompile(context: vscode.ExtensionContext) {
+	const outputChannel = getFreshOutputChannel();
+
+	const editor = vscode.window.activeTextEditor;
+	if (editor === undefined) {
+		outputChannel.appendLine('No open file');
+		return;
+	}
+	if (editor.document.languageId !== 'lmtx') {
+		outputChannel.appendLine('Not LMTX');
+		return;
+	}
+
+	const workspaceFolders = vscode.workspace.workspaceFolders;
+	if (workspaceFolders === undefined) {
+		outputChannel.appendLine('Workspace must be opened for compilation');
+		return;
+	}
+
+	const currentFilePath = editor.document.fileName;
+	const currentWorkspaceFolderPath = workspaceFolders[0].uri.path;
+	outputChannel.appendLine(currentWorkspaceFolderPath);
+	const cmd = child_process.spawn('context', ['--nonstopmode', currentFilePath], {'cwd': currentWorkspaceFolderPath});
+	outputChannel.show();
+	outputChannel.append('wtfx');
+	cmd.stdout.on('data', (data) => {
+		outputChannel.append(data.toString());
+	});
+	cmd.on('close', (code) => {
+		outputChannel.appendLine(`\nFinished. Exit code: ${code}`);
+	});
+}
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -152,7 +203,8 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Hello World from ConTeXt LMTX!');
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('context-lmtx.pickfonts', cmdPickFont));
+	context.subscriptions.push(vscode.commands.registerCommand('context-lmtx.pickfonts', () => cmdPickFont(context)));
+	context.subscriptions.push(vscode.commands.registerCommand("context-lmtx.compile", () => cmdCompile(context)));
 }
 
 // this method is called when your extension is deactivated

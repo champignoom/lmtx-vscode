@@ -38,6 +38,11 @@
 			{
 				"command": "context-lmtx.pickfonts",
 				"title": "LMTX: Pick Fonts"
+			},
+
+			{
+				"command": "context-lmtx.compile",
+				"title": "LMTX: Compile"
 			}
 		]
 	},
