@@ -8,7 +8,7 @@ import { assert } from 'console';
 import { findSourceMap } from 'module';
 import { resolveCliPathFromVSCodeExecutablePath } from 'vscode-test';
 
-import { getFreshOutputChannel } from './output_channel'
+import { myOutputChannel, getFreshOutputChannel } from './output_channel'
 import { cmdPickFont } from './font_picker'
 
 function cmdCompile(context: vscode.ExtensionContext) {

@@ -23,6 +23,8 @@ const mtxrun_font_fields = [
 	FIELD_INSTANCES,
 ];
 
+// FIXME: when executing `mtxrun` for the first time, the format is a bit noisy
+
 /**
  * @param thead The header of the output of mtxrun for fonts.
  * Should be in the form `identifier   familyname  fontname  filename subfont   instances`
@@ -74,7 +76,11 @@ function get_font_fields(row: String, indices: Array<number>): Record<string,str
 	return result;
 }
 
-function _cmdPickFont() {
+/**
+ * @return json
+ *  [{'identifier': 'simsumextbregular', 'familyname': 'simsunextb', ...}, ...]
+ */
+function getFontJson() {
 	// mtxrun --script fonts --list --all
 	// traverse ${ConTeXT_Path}/tex/texmf/fonts, create map
 
@@ -103,7 +109,9 @@ function _cmdPickFont() {
 		outputChannel.appendLine('expected:');
 		outputChannel.appendLine(mtxrun_font_fields.join(" "));
 		return;
-	}
+    }
+    
+    let result = [];
 
 	for (let i=2; i<result_lines.length; ++i) {
 		if (result_lines[i].length === 0) {
@@ -117,9 +125,13 @@ function _cmdPickFont() {
 			outputChannel.appendLine('header:');
 			outputChannel.appendLine(result_lines[0]);
 			return;
-		}
-		outputChannel.appendLine(`${field_values.identifier}, ${field_values.familyname}, ${field_values.fontname}, ${field_values.filename}`);
-	}
+        }
+        
+        result.push(field_values);
+		// outputChannel.appendLine(`${field_values.identifier}, ${field_values.familyname}, ${field_values.fontname}, ${field_values.filename}`);
+    }
+    
+    return result;
 }
 
 function cmdPickFont(context: vscode.ExtensionContext) {
@@ -127,15 +139,18 @@ function cmdPickFont(context: vscode.ExtensionContext) {
 	let panel = vscode.window.createWebviewPanel(
 		'lmtxFontPicker',
 		'LMTX Font Picker',
-		vscode.ViewColumn.Beside,
+        vscode.ViewColumn.Beside,
+        {
+            enableScripts: true,
+        }
 	);
 
 	const fontPickerHtmlPath = path.join(context.extensionPath, 'src', FONT_PICKER_HTML);
 	const outputChannel = getFreshOutputChannel();
 	outputChannel.appendLine(fontPickerHtmlPath);
 
-	//
-	panel.webview.html = fs.readFileSync(fontPickerHtmlPath).toString();
+    panel.webview.html = fs.readFileSync(fontPickerHtmlPath).toString();
+    panel.webview.postMessage(getFontJson());
 }
 
 export {

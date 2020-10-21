@@ -14,5 +14,6 @@ function getFreshOutputChannel(): vscode.OutputChannel {
 }
 
 export {
+	myOutputChannel,
     getFreshOutputChannel,
 }

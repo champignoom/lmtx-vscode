@@ -3,8 +3,47 @@
     <head>
         <meta charset="utf-8"/>
         <title>Font Picker Title For HTML</title>
+        <style>
+            td, th {
+                border: 1px solid black;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+        </style>
     </head>
     <body>
         Placeholder for the font picker.
+        <table id="fonts">
+            <thead>
+                <th>identifier</th>
+                <th>familyname</th>
+                <th>fontname</th>
+                <th>filename</th>
+                <th>subfont</th>
+                <th>instances</th>
+            </thead>
+            <tbody id="fonts_tbody">
+            </tbody>
+        </table>
+        <script>
+            window.addEventListener('message', ev => {
+                const data = ev.data;
+                const fonts_tbody = document.getElementById('fonts_tbody');
+                for (let row of data) {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = [
+                        `<td>${row.identifier}</td>`,
+                        `<td>${row.familyname}</td>`,
+                        `<td>${row.fontname}</td>`,
+                        `<td>${row.filename}</td>`,
+                        `<td>${row.subfont}</td>`,
+                        `<td>${row.instances}</td>`,
+                    ].join('');
+                    fonts_tbody.appendChild(tr);
+                }
+            });
+        </script>
     </body>
 </html>
