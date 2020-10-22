@@ -1,13 +1,4 @@
 {
-	"Print to console": {
-		"prefix": "log",
-		"body": [
-			"console.log('$1');",
-			"$2"
-		],
-		"description": "Log output to console"
-	},
-
 	"Long Sample Document": {
 		"prefix": "\\lmtx-sample-long-document",
 		"body": [
@@ -186,7 +177,7 @@
 			"% location={footer,middle}, %header footer left middle right inleft inright margin inmargin atmargin marginedge",
 			"% state=start %start stop",
 			"]",
-			"$1"
+			""
 		]
 	},
 
@@ -206,7 +197,7 @@
 			" footer=2cm,",
 			" % height=25.7cm,",
 			"]",
-			"$1"
+			""
 		]
 	},
 
@@ -219,7 +210,25 @@
 			"% \\setscript[hanzi]",
 			"",
 			"\\definefontfamily[mainface][rm][simsun][]",
-			"\\setupbodyfont[mainface]"
+			"\\setupbodyfont[mainface]",
+			""
+		]
+	},
+
+	"Code Highlight with Vim": {
+		"prefix": "\\lmtx-code-highlight-with-vim",
+		"body": [
+			"% before \\starttext",
+			"\\usemodule[vim]",
+			"%\\setupvimtyping[vimcommand=nvim] % if you use neovim",
+			"\\definevimtyping [RUBY] [syntax=ruby]",
+			"",
+			"% after \\starttext",
+			"\\startRUBY",
+			"# Wow, my first ruby program",
+			"print(\"Hello World\")",
+			"\\stopRUBY",
+			""
 		]
 	},
 

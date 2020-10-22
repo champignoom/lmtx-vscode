@@ -35,16 +35,16 @@
 		],
 		"commands": [
 			{
-				"command": "context-lmtx.helloWorld",
-				"title": "Hello World"
-			},
-			{
 				"command": "context-lmtx.pickfonts",
 				"title": "LMTX: Pick Fonts"
 			},
 			{
 				"command": "context-lmtx.compile",
 				"title": "LMTX: Compile"
+			},
+			{
+				"command": "context-lmtx.print-vim-filetypes",
+				"title": "LMTX: Print Supported Vim File Types"
 			}
 		]
 	},
