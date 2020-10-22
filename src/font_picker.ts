@@ -25,6 +25,9 @@ const mtxrun_font_fields = [
 
 // FIXME: when executing `mtxrun` for the first time, the format is a bit noisy
 
+// `fc-query` format fields: https://github.com/behdad/fontconfig/blob/master/fontconfig/fontconfig.h
+// `fc-query /usr/share/fonts/TTF/simsun.ttc /usr/share/fonts/TTF/pala.ttf -f '%{fullname} X %{capability}: %{charset}\n'`
+
 /**
  * @param thead The header of the output of mtxrun for fonts.
  * Should be in the form `identifier   familyname  fontname  filename subfont   instances`

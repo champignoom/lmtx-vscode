@@ -8,8 +8,8 @@
 		"description": "Log output to console"
 	},
 
-	"LMTX Sample Document": {
-		"prefix": "\\lmtx-sample-document",
+	"Long Sample Document": {
+		"prefix": "\\lmtx-sample-long-document",
 		"body": [
 			"$1% \"Hello world!\" document for the ConTeXt typesetting system",
 			"%",
@@ -133,6 +133,52 @@
 		]
 	},
 
+	"Chapter/Section Structure and TOC": {
+		"prefix": "\\lmtx-sample-chapter-section-structure-toc",
+		"body": [
+			"\\starttext",
+			"",
+			"\\startstandardmakeup",
+			"\\midaligned{\\tfd The Title}",
+		  	"\\stopstandardmakeup",
+			"",
+			"\\completecontent",
+			"",
+			"% \\startpart[title=Part X] % highest level of sectioning, usually not used",
+			"% numbered",
+			"\\startchapter[title=Chapter X] % level 2",
+			"\\startsection[title=Section X] % level 3",
+			"\\startsubsection[title=Subsection X] % level 4",
+			"\\startsubsubsection[title=Subsubsection X] % level 5",
+			"\\startsubsubsubsection[title=Subsubsubsection X] % level 6",
+			"\\startsubsubsubsubsection[title=Subsubsubsubsection X] % level 7",
+			"\\stopsubsubsubsubsection",
+			"\\stopsubsubsubsection",
+			"\\stopsubsubsection",
+			"\\stopsubsection",
+			"\\stopsection",
+			"\\stopchapter",
+			"",
+			"% unnumbered",
+			"\\starttitle[title=Title X] % level 2",
+			"\\startsubject[title=Subject X] % level 3",
+			"\\startsubsubject[title=Subsubject X] % level 4",
+			"\\startsubsubsubject[title=Subsubsubject X] % level 5",
+			"\\startsubsubsubsubject[title=Subsubsubsubject X] % level 6",
+			"\\startsubsubsubsubsubject[title=Subsubsubsubsubject X] % level 7",
+			"\\stopsubsubsubsubsubject",
+			"\\stopsubsubsubsubject",
+			"\\stopsubsubsubject",
+			"\\stopsubsubject",
+			"\\stopsubject",
+			"\\stoptitle",
+			"",
+			"% \\stoppart",
+			"",
+			"\\stoptext"
+		]
+	},
+
 	"Setup Page Numbering": {
 		"prefix": "\\lmtx-setup-page-numbering",
 		"body": [
@@ -147,17 +193,33 @@
 	"Setup Page Layout": {
 		"prefix": "\\lmtx-setup-page-layout",
 		"body": [
+			"% figure: https://wiki.contextgarden.net/Layout",
+			"% reference: https://wiki.contextgarden.net/Command/setuplayout",
+			"\\setuppapersize[A4]",
 			"\\setuplayout[",
 			" backspace=3cm,",
 			" margin=2cm,",
 			" margindistance=.5cm,",
-			" width=15cm,",
+			" % width=15cm,",
 			" topspace=2cm,",
 			" header=2cm,",
 			" footer=2cm,",
-			" height=25.7cm,",
+			" % height=25.7cm,",
 			"]",
 			"$1"
+		]
+	},
+
+	"Setup Chinese": {
+		"prefix": "\\lmtx-setup-chinese",
+		"body": [
+			"% \\mainlanguage[cn]",
+			"% \\language[cn]",
+			"% \\enableregime[utf]",
+			"% \\setscript[hanzi]",
+			"",
+			"\\definefontfamily[mainface][rm][simsun][]",
+			"\\setupbodyfont[mainface]"
 		]
 	},
 
